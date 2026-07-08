@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchro | Invisible Orchestration for Botswana Properties</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <style>
+        :root {
+            --cream: #faf8f5;
+            --cream-dark: #f5f0e8;
+            --charcoal: #1a1a1a;
+            --charcoal-light: #2d2d2d;
+            --gold: #c9a96e;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a88b5a;
+            --sage: #7a8b6e;
+            --sage-light: #a3b899;
+            --terracotta: #b8835f;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #9a9a9a;
+            --border: rgba(26,26,26,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
+        .serif { font-family: 'Cormorant Garamond', serif; }
+
+        /* NAVIGATION */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        nav.scrolled { background: rgba(250, 248, 245, 0.92); backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); padding: 16px 48px; }
+        .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+        .logo-mark { width: 42px; height: 42px; position: relative; }
+        .logo-mark svg { width: 100%; height: 100%; }
+        .nav-logo-text { display: flex; flex-direction: column; }
+        .nav-logo-text .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; font-weight: 600; color: var(--charcoal); letter-spacing: 3px; text-transform: uppercase; line-height: 1; }
+        .nav-logo-text .tagline { font-size: 0.6em; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; margin-top: 2px; }
+        .nav-links { display: flex; align-items: center; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85em; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-links a:hover { color: var(--charcoal); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta { background: var(--charcoal); color: var(--cream) !important; padding: 12px 28px; border-radius: 100px; font-size: 0.8em !important; font-weight: 600; letter-spacing: 1.5px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background: var(--gold); color: var(--charcoal) !important; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3); }
+        .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--charcoal); margin: 5px 0; transition: all 0.3s; }
+
+        /* HERO */
+        .hero { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%); }
+        .hero-bg-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 120px 40px 60px; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 32px; opacity: 0; animation: fadeInUp 0.8s 0.2s forwards; }
+        .hero-eyebrow .line { width: 40px; height: 1px; background: var(--gold); }
+        .hero-eyebrow span { font-size: 0.75em; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8em, 6vw, 5em); font-weight: 300; line-height: 1.1; color: var(--charcoal); margin-bottom: 28px; opacity: 0; animation: fadeInUp 0.8s 0.4s forwards; }
+        .hero h1 em { font-style: italic; color: var(--gold-dark); font-weight: 400; }
+        .hero-subtitle { font-size: 1.15em; color: var(--text-secondary); max-width: 560px; margin: 0 auto 48px; line-height: 1.7; font-weight: 300; opacity: 0; animation: fadeInUp 0.8s 0.6s forwards; }
+        .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeInUp 0.8s 0.8s forwards; }
+        .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--charcoal); padding: 16px 36px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9em; letter-spacing: 0.5px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: none; cursor: pointer; }
+        .btn-gold:hover { background: var(--gold-dark); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(201, 169, 110, 0.35); }
+        .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--charcoal); padding: 16px 36px; border-radius: 100px; text-decoration: none; font-weight: 500; font-size: 0.9em; letter-spacing: 0.5px; border: 1.5px solid var(--charcoal); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-outline:hover { background: var(--charcoal); color: var(--cream); transform: translateY(-3px); }
+        .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeInUp 0.8s 1.2s forwards; }
+        .hero-scroll span { font-size: 0.7em; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
+        .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s infinite; }
+
+        /* FLOATING STATS */
+        .floating-stats { position: relative; z-index: 10; margin-top: -60px; padding: 0 40px; }
+        .stats-container { max-width: 1100px; margin: 0 auto; background: var(--charcoal); border-radius: 24px; padding: 48px 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; box-shadow: 0 24px 64px rgba(26, 26, 26, 0.15); }
+        .stat-item { text-align: center; position: relative; }
+        .stat-item:not(:last-child)::after { content: ''; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 1px; height: 50px; background: rgba(255,255,255,0.1); }
+        .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8em; font-weight: 600; color: var(--gold); line-height: 1; }
+        .stat-number span { font-size: 0.5em; vertical-align: top; }
+        .stat-label { font-size: 0.8em; color: rgba(255,255,255,0.6); margin-top: 8px; letter-spacing: 0.5px; }
+
+        /* SECTIONS COMMON */
+        section { padding: 120px 40px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .section-eyebrow .line { width: 48px; height: 1px; background: var(--gold); }
+        .section-eyebrow span { font-size: 0.75em; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2em, 4vw, 3.2em); font-weight: 400; line-height: 1.15; color: var(--charcoal); margin-bottom: 20px; }
+        .section-title em { font-style: italic; color: var(--gold-dark); }
+        .section-desc { color: var(--text-secondary); font-size: 1.05em; line-height: 1.7; max-width: 600px; }
+
+        /* REALITY */
+        .reality { background: var(--cream); padding-bottom: 80px; }
+        .reality-header { text-align: center; margin-bottom: 80px; }
+        .reality-header .section-eyebrow { justify-content: center; }
+        .reality-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .reality-card { background: white; border-radius: 20px; padding: 48px 36px; border: 1px solid var(--border); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .reality-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), var(--terracotta)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reality-card:hover::before { transform: scaleX(1); }
+        .reality-card:hover { box-shadow: 0 24px 48px rgba(26, 26, 26, 0.06); transform: translateY(-8px); }
+        .reality-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6em; margin-bottom: 24px; background: linear-gradient(135deg, var(--cream-dark), var(--cream)); border: 1px solid var(--border); }
+        .reality-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5em; font-weight: 600; margin-bottom: 12px; color: var(--charcoal); }
+        .reality-card p { color: var(--text-secondary); line-height: 1.7; font-size: 0.95em; }
+
+        /* PULSE */
+        .pulse { background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%); position: relative; overflow: hidden; }
+        .pulse::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%); }
+        .pulse-header { text-align: center; margin-bottom: 80px; }
+        .pulse-header .section-eyebrow { justify-content: center; }
+        .pulse-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 900px; margin: 0 auto 60px; }
+        .pulse-stat { text-align: center; padding: 32px 20px; background: white; border-radius: 16px; border: 1px solid var(--border); transition: all 0.4s; }
+        .pulse-stat:hover { box-shadow: 0 12px 32px rgba(26, 26, 26, 0.06); transform: translateY(-4px); }
+        .pulse-stat .number { font-family: 'Cormorant Garamond', serif; font-size: 2.4em; font-weight: 600; color: var(--charcoal); line-height: 1; }
+        .pulse-stat .number.gold { color: var(--gold-dark); }
+        .pulse-stat .label { font-size: 0.8em; color: var(--text-muted); margin-top: 8px; letter-spacing: 0.5px; }
+        .pulse-chart { max-width: 800px; margin: 0 auto; background: white; border-radius: 24px; padding: 40px; border: 1px solid var(--border); position: relative; }
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .chart-header h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3em; font-weight: 600; }
+        .chart-legend { display: flex; gap: 20px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8em; color: var(--text-muted); }
+        .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .legend-dot.gold { background: var(--gold); }
+        .legend-dot.sage { background: var(--sage); }
+        .chart-svg { width: 100%; height: 200px; }
+        .chart-svg path { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+        .chart-area { fill: url(#goldGradient); opacity: 0.15; }
+
+        /* ORCHESTRATE */
+        .orchestrate { background: var(--cream); }
+        .orchestrate-header { text-align: center; margin-bottom: 80px; }
+        .orchestrate-header .section-eyebrow { justify-content: center; }
+        .orchestrate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .orch-card { background: white; border-radius: 20px; padding: 40px; border: 1px solid var(--border); display: flex; gap: 24px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .orch-card:hover { box-shadow: 0 20px 48px rgba(26, 26, 26, 0.06); transform: translateY(-6px); border-color: rgba(201, 169, 110, 0.3); }
+        .orch-icon { width: 52px; height: 52px; min-width: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--cream-dark), var(--cream)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4em; }
+        .orch-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4em; font-weight: 600; margin-bottom: 8px; color: var(--charcoal); }
+        .orch-content p { color: var(--text-secondary); font-size: 0.92em; line-height: 1.7; }
+
+        /* PORTFOLIO */
+        .portfolio { background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%); padding-bottom: 80px; }
+        .portfolio-header { text-align: center; margin-bottom: 60px; }
+        .portfolio-header .section-eyebrow { justify-content: center; }
+        .portfolio-slider { display: flex; gap: 24px; overflow-x: auto; padding: 20px 0 40px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .portfolio-slider::-webkit-scrollbar { display: none; }
+        .portfolio-card { min-width: 340px; background: white; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); scroll-snap-align: start; transition: all 0.5s; }
+        .portfolio-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(26, 26, 26, 0.08); }
+        .portfolio-img { height: 220px; background: linear-gradient(135deg, var(--charcoal-light) 0%, var(--charcoal) 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .portfolio-img::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E"); }
+        .portfolio-img .emoji { font-size: 4em; z-index: 2; filter: grayscale(0.3); }
+        .portfolio-img .overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.5)); z-index: 2; }
+        .portfolio-img .tag { display: inline-block; background: var(--gold); color: var(--charcoal); padding: 4px 14px; border-radius: 100px; font-size: 0.7em; font-weight: 600; letter-spacing: 1px; }
+        .portfolio-info { padding: 28px; }
+        .portfolio-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4em; font-weight: 600; margin-bottom: 6px; }
+        .portfolio-info .location { font-size: 0.85em; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+        .portfolio-metrics { display: flex; gap: 24px; padding-top: 16px; border-top: 1px solid var(--border); }
+        .portfolio-metrics .metric { text-align: center; }
+        .portfolio-metrics .metric .val { font-family: 'Cormorant Garamond', serif; font-size: 1.6em; font-weight: 600; color: var(--gold-dark); }
+        .portfolio-metrics .metric .lbl { font-size: 0.7em; color: var(--text-muted); letter-spacing: 0.5px; margin-top: 2px; }
+
+        /* PRICING */
+        .pricing-section { background: var(--cream); padding-bottom: 80px; }
+        .pricing-header { text-align: center; margin-bottom: 60px; }
+        .pricing-header .section-eyebrow { justify-content: center; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; align-items: start; }
+        .price-card { background: white; border-radius: 24px; padding: 44px 32px; border: 1.5px solid var(--border); position: relative; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .price-card:hover { box-shadow: 0 24px 48px rgba(26, 26, 26, 0.06); transform: translateY(-8px); }
+        .price-card.featured { border-color: var(--gold); box-shadow: 0 12px 40px rgba(201, 169, 110, 0.12); transform: scale(1.03); }
+        .price-card.featured:hover { transform: scale(1.03) translateY(-8px); }
+        .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--charcoal); padding: 6px 20px; border-radius: 100px; font-size: 0.7em; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 4px 16px rgba(201, 169, 110, 0.3); }
+        .price-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5em; font-weight: 600; margin-bottom: 4px; }
+        .price-card .subtitle { font-size: 0.85em; color: var(--text-muted); margin-bottom: 24px; }
+        .price-display { font-family: 'Cormorant Garamond', serif; font-size: 4em; font-weight: 300; color: var(--charcoal); line-height: 1; margin-bottom: 4px; }
+        .price-display span { font-size: 0.35em; color: var(--text-muted); font-family: 'Inter', sans-serif; font-weight: 400; vertical-align: middle; margin-left: 4px; }
+        .price-note { font-size: 0.8em; color: var(--text-muted); margin-bottom: 32px; }
+        .price-features { list-style: none; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9em; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 10px; }
+        .price-features li::before { content: '✓'; color: var(--sage); font-weight: bold; flex-shrink: 0; margin-top: 1px; }
+        .price-btn { display: block; width: 100%; padding: 14px; background: var(--charcoal); color: white; text-align: center; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 0.9em; margin-top: 28px; transition: all 0.4s; letter-spacing: 0.5px; }
+        .price-btn:hover { background: var(--gold); color: var(--charcoal); }
+        .price-card.featured .price-btn { background: var(--gold); color: var(--charcoal); }
+        .price-card.featured .price-btn:hover { background: var(--gold-dark); }
+
+        /* TESTIMONIALS */
+        .testimonials { background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%); position: relative; overflow: hidden; }
+        .testimonials::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(201, 169, 110, 0.04) 0%, transparent 70%); }
+        .testimonials-header { text-align: center; margin-bottom: 60px; }
+        .testimonials-header .section-eyebrow { justify-content: center; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .testimonial-card { background: white; border-radius: 20px; padding: 40px 32px; border: 1px solid var(--border); position: relative; transition: all 0.4s; }
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(26, 26, 26, 0.06); }
+        .testimonial-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.3em; font-style: italic; color: var(--charcoal); line-height: 1.5; margin-bottom: 28px; }
+        .testimonial-author { display: flex; align-items: center; gap: 14px; }
+        .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-light), var(--gold)); display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--charcoal); font-size: 1.1em; }
+        .author-info h4 { font-size: 0.95em; font-weight: 600; color: var(--charcoal); }
+        .author-info p { font-size: 0.8em; color: var(--text-muted); margin-top: 2px; }
+        .quote-mark { position: absolute; top: 24px; right: 28px; font-family: 'Cormorant Garamond', serif; font-size: 4em; color: var(--gold); opacity: 0.2; line-height: 1; }
+
+        /* FAQ */
+        .faq { background: var(--cream); padding-bottom: 80px; }
+        .faq-header { text-align: center; margin-bottom: 60px; }
+        .faq-header .section-eyebrow { justify-content: center; }
+        .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .faq-item { background: white; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; transition: all 0.4s; }
+        .faq-item:hover { border-color: rgba(201, 169, 110, 0.3); }
+        .faq-question { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 1em; color: var(--charcoal); transition: color 0.3s; }
+        .faq-question:hover { color: var(--gold-dark); }
+        .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--cream-dark); display: flex; align-items: center; justify-content: center; font-size: 0.8em; transition: all 0.3s; flex-shrink: 0; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); background: var(--gold); }
+        .faq-answer { padding: 0 28px; max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); color: var(--text-secondary); line-height: 1.7; font-size: 0.95em; }
+        .faq-item.active .faq-answer { padding: 0 28px 24px; max-height: 300px; }
+
+        /* CTA */
+        .cta-section { background: var(--charcoal); position: relative; overflow: hidden; padding: 100px 40px; }
+        .cta-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .cta-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .cta-section .section-eyebrow { justify-content: center; margin-bottom: 20px; }
+        .cta-section .section-eyebrow .line { background: var(--gold); }
+        .cta-section .section-eyebrow span { color: var(--gold-light); }
+        .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2em, 4vw, 3.2em); font-weight: 400; color: white; line-height: 1.15; margin-bottom: 20px; }
+        .cta-section h2 em { font-style: italic; color: var(--gold); }
+        .cta-section p { color: rgba(255,255,255,0.6); font-size: 1.05em; line-height: 1.7; margin-bottom: 40px; }
+        .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: var(--charcoal); padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95em; letter-spacing: 0.5px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: none; cursor: pointer; }
+        .cta-btn:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(201, 169, 110, 0.3); }
+        .cta-btn-outline { display: inline-flex; align-items: center; gap: 12px; background: transparent; color: white; padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 500; font-size: 0.95em; letter-spacing: 0.5px; border: 1.5px solid rgba(255,255,255,0.3); transition: all 0.4s; margin-left: 16px; }
+        .cta-btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+
+        /* FOOTER */
+        footer { background: var(--charcoal); padding: 80px 40px 40px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand .logo-mark { width: 48px; height: 48px; margin-bottom: 20px; }
+        .footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.9em; line-height: 1.7; max-width: 280px; }
+        .footer-col h4 { color: white; font-size: 0.85em; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9em; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.8em; }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9em; transition: all 0.3s; }
+        .footer-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--charcoal); }
+
+        /* FORM STYLES */
+        .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { 
+            border-color: var(--gold) !important; 
+            background: rgba(255,255,255,0.1) !important; 
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { 
+            color: rgba(255,255,255,0.4); 
+        }
+        .contact-form select option { 
+            background: var(--charcoal); 
+            color: #fff; 
+        }
+        @media (max-width: 768px) {
+            .contact-form .form-row { grid-template-columns: 1fr !important; }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.2); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .stats-container { grid-template-columns: repeat(2, 1fr); padding: 40px; }
+            .stat-item:not(:last-child)::after { display: none; }
+            .stat-item:nth-child(2)::after { display: none; }
+            .reality-grid { grid-template-columns: repeat(2, 1fr); }
+            .pulse-grid { grid-template-columns: repeat(2, 1fr); }
+            .orchestrate-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            nav.scrolled { padding: 12px 24px; }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero-content { padding: 100px 24px 40px; }
+            .hero-cta-group { flex-direction: column; align-items: center; }
+            .stats-container { grid-template-columns: 1fr; gap: 32px; padding: 32px; margin-top: -40px; }
+            .stat-item::after { display: none !important; }
+            section { padding: 80px 24px; }
+            .reality-grid { grid-template-columns: 1fr; }
+            .pulse-grid { grid-template-columns: 1fr 1fr; }
+            .orchestrate-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .price-card.featured { transform: none; }
+            .price-card.featured:hover { transform: translateY(-8px); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .cta-btn-outline { margin-left: 0; margin-top: 16px; }
+            .cta-section .hero-cta-group { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .pulse-grid { grid-template-columns: 1fr; }
+            .portfolio-card { min-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="21" cy="21" r="20" stroke="#c9a96e" stroke-width="1.5"/>
+                    <path d="M21 8 L21 34 M8 21 L34 21" stroke="#c9a96e" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="21" cy="21" r="6" stroke="#1a1a1a" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="nav-logo-text">
+                <span class="brand">Synchro</span>
+                <span class="tagline">Property Management</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#reality">The Reality</a>
+            <a href="#pulse">Market Pulse</a>
+            <a href="#orchestrate">Orchestrate</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#cta" class="nav-cta">Get Started</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="line"></div>
+                <span>Botswana's Premier Property Platform</span>
+                <div class="line"></div>
+            </div>
+            <h1>Invisible Orchestration for <em>Exceptional</em> Properties</h1>
+            <p class="hero-subtitle">We handle the complexity of property management so you can focus on what matters most — growing your portfolio and maximizing returns across Botswana's thriving real estate market.</p>
+            <div class="hero-cta-group">
+                <a href="#pricing" class="btn-gold">Explore Plans →</a>
+                <a href="#portfolio" class="btn-outline">View Portfolio</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- FLOATING STATS -->
+    <div class="floating-stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">250<span>+</span></div>
+                <div class="stat-label">Properties Managed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98<span>%</span></div>
+                <div class="stat-label">Occupancy Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">12<span>hrs</span></div>
+                <div class="stat-label">Avg. Response Time</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9<span>/5</span></div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE REALITY -->
+    <section class="reality" id="reality">
+        <div class="section-inner">
+            <div class="reality-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>The Reality</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">The Challenges Every <em>Property Owner</em> Faces</h2>
+                <p class="section-desc">Managing property in Botswana comes with unique hurdles. We've built Synchro to eliminate every single one.</p>
+            </div>
+            <div class="reality-grid">
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">📋</div>
+                    <h3>Tenant Screening</h3>
+                    <p>Finding reliable tenants is time-consuming and risky. Our thorough vetting process ensures only qualified applicants make it through.</p>
+                </div>
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">🔧</div>
+                    <h3>Maintenance Chaos</h3>
+                    <p>From emergency repairs to routine upkeep, coordinating contractors across Gaborone and beyond is a full-time job.</p>
+                </div>
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">📊</div>
+                    <h3>Financial Tracking</h3>
+                    <p>Rent collection, expense logging, tax preparation — keeping the books straight shouldn't require an accounting degree.</p>
+                </div>
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">⚖️</div>
+                    <h3>Legal Compliance</h3>
+                    <p>Navigating Botswana's tenancy laws, lease agreements, and dispute resolution requires expertise most owners lack.</p>
+                </div>
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">📱</div>
+                    <h3>Communication Gaps</h3>
+                    <p>Tenants expect instant responses. Missed calls and delayed replies lead to frustration and turnover.</p>
+                </div>
+                <div class="reality-card animate-on-scroll">
+                    <div class="reality-icon">📈</div>
+                    <h3>Market Visibility</h3>
+                    <p>Without professional marketing, even prime properties sit vacant longer than they should in today's competitive market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET PULSE -->
+    <section class="pulse" id="pulse">
+        <div class="section-inner">
+            <div class="pulse-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>Market Pulse</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">Botswana Real Estate <em>By The Numbers</em></h2>
+                <p class="section-desc">Data-driven insights into the market dynamics shaping property investment in Botswana today.</p>
+            </div>
+            <div class="pulse-grid">
+                <div class="pulse-stat animate-on-scroll">
+                    <div class="number gold">7.2<span>%</span></div>
+                    <div class="label">Annual Rental Yield</div>
+                </div>
+                <div class="pulse-stat animate-on-scroll">
+                    <div class="number">14<span> days</span></div>
+                    <div class="label">Avg. Time to Rent</div>
+                </div>
+                <div class="pulse-stat animate-on-scroll">
+                    <div class="number gold">+23<span>%</span></div>
+                    <div class="label">Property Value Growth</div>
+                </div>
+                <div class="pulse-stat animate-on-scroll">
+                    <div class="number">3.5<span>x</span></div>
+                    <div class="label">Return on Investment</div>
+                </div>
+            </div>
+            <div class="pulse-chart animate-on-scroll">
+                <div class="chart-header">
+                    <h4>Rental Yield Trend — Gaborone Metro</h4>
+                    <div class="chart-legend">
+                        <div class="legend-item"><div class="legend-dot gold"></div>Residential</div>
+                        <div class="legend-item"><div class="legend-dot sage"></div>Commercial</div>
+                    </div>
+                </div>
+                <svg class="chart-svg" viewBox="0 0 720 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="sageGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#7a8b6e" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="#7a8b6e" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Residential area -->
+                    <path class="chart-area" d="M0,140 Q60,120 120,110 T240,90 T360,80 T480,70 T600,60 T720,50 L720,200 L0,200 Z" fill="url(#goldGradient)"/>
+                    <!-- Commercial area -->
+                    <path class="chart-area" d="M0,160 Q60,150 120,145 T240,135 T360,125 T480,115 T600,105 T720,95 L720,200 L0,200 Z" fill="url(#sageGradient)"/>
+                    <!-- Residential line -->
+                    <path d="M0,140 Q60,120 120,110 T240,90 T360,80 T480,70 T600,60 T720,50" stroke="#c9a96e" fill="none" stroke-width="3"/>
+                    <!-- Commercial line -->
+                    <path d="M0,160 Q60,150 120,145 T240,135 T360,125 T480,115 T600,105 T720,95" stroke="#7a8b6e" fill="none" stroke-width="3"/>
+                    <!-- Data points -->
+                    <circle cx="0" cy="140" r="4" fill="#c9a96e"/>
+                    <circle cx="120" cy="110" r="4" fill="#c9a96e"/>
+                    <circle cx="240" cy="90" r="4" fill="#c9a96e"/>
+                    <circle cx="360" cy="80" r="4" fill="#c9a96e"/>
+                    <circle cx="480" cy="70" r="4" fill="#c9a96e"/>
+                    <circle cx="600" cy="60" r="4" fill="#c9a96e"/>
+                    <circle cx="720" cy="50" r="4" fill="#c9a96e"/>
+                    <circle cx="0" cy="160" r="4" fill="#7a8b6e"/>
+                    <circle cx="120" cy="145" r="4" fill="#7a8b6e"/>
+                    <circle cx="240" cy="135" r="4" fill="#7a8b6e"/>
+                    <circle cx="360" cy="125" r="4" fill="#7a8b6e"/>
+                    <circle cx="480" cy="115" r="4" fill="#7a8b6e"/>
+                    <circle cx="600" cy="105" r="4" fill="#7a8b6e"/>
+                    <circle cx="720" cy="95" r="4" fill="#7a8b6e"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORCHESTRATE -->
+    <section class="orchestrate" id="orchestrate">
+        <div class="section-inner">
+            <div class="orchestrate-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>How It Works</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">We <em>Orchestrate</em>, You Celebrate</h2>
+                <p class="section-desc">A seamless, technology-driven approach to property management that puts owners first.</p>
+            </div>
+            <div class="orchestrate-grid">
+                <div class="orch-card animate-on-scroll">
+                    <div class="orch-icon">🔍</div>
+                    <div class="orch-content">
+                        <h3>Smart Onboarding</h3>
+                        <p>We assess your property, set optimal rental rates using market data, and prepare it for the market — all within 48 hours of engagement.</p>
+                    </div>
+                </div>
+                <div class="orch-card animate-on-scroll">
+                    <div class="orch-icon">🎯</div>
+                    <div class="orch-content">
+                        <h3>Precision Marketing</h3>
+                        <p>Professional photography, virtual tours, and targeted listings across Botswana's top rental platforms ensure maximum visibility.</p>
+                    </div>
+                </div>
+                <div class="orch-card animate-on-scroll">
+                    <div class="orch-icon">🛡️</div>
+                    <div class="orch-content">
+                        <h3>Rigorous Vetting</h3>
+                        <p>Every applicant undergoes background checks, employment verification, and reference validation before they ever receive keys.</p>
+                    </div>
+                </div>
+                <div class="orch-card animate-on-scroll">
+                    <div class="orch-icon">🤝</div>
+                    <div class="orch-content">
+                        <h3>Full-Spectrum Care</h3>
+                        <p>From rent collection and maintenance coordination to lease renewals and legal compliance — we handle it all, 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-inner">
+            <div class="portfolio-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>Portfolio</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">Properties We <em>Proudly</em> Manage</h2>
+                <p class="section-desc">A curated selection of residences and commercial spaces across Botswana's most desirable locations.</p>
+            </div>
+            <div class="portfolio-slider">
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <span class="emoji">🏡</span>
+                        <div class="overlay"><span class="tag">Residential</span></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>The Residences at Kgale</h3>
+                        <div class="location">📍 Gaborone, Kgale View</div>
+                        <div class="portfolio-metrics">
+                            <div class="metric"><div class="val">12</div><div class="lbl">Units</div></div>
+                            <div class="metric"><div class="val">100%</div><div class="lbl">Occupied</div></div>
+                            <div class="metric"><div class="val">8.1%</div><div class="lbl">Yield</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <span class="emoji">🏢</span>
+                        <div class="overlay"><span class="tag">Commercial</span></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>CBD Central Plaza</h3>
+                        <div class="location">📍 Gaborone, Central Business District</div>
+                        <div class="portfolio-metrics">
+                            <div class="metric"><div class="val">24</div><div class="lbl">Units</div></div>
+                            <div class="metric"><div class="val">96%</div><div class="lbl">Occupied</div></div>
+                            <div class="metric"><div class="val">9.4%</div><div class="lbl">Yield</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <span class="emoji">🌴</span>
+                        <div class="overlay"><span class="tag">Luxury Villa</span></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Phakalane Estate Collection</h3>
+                        <div class="location">📍 Gaborone, Phakalane</div>
+                        <div class="portfolio-metrics">
+                            <div class="metric"><div class="val">6</div><div class="lbl">Villas</div></div>
+                            <div class="metric"><div class="val">100%</div><div class="lbl">Occupied</div></div>
+                            <div class="metric"><div class="val">7.8%</div><div class="lbl">Yield</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-img">
+                        <span class="emoji">🏘️</span>
+                        <div class="overlay"><span class="tag">Townhouses</span></div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Block 8 Gardens</h3>
+                        <div class="location">📍 Gaborone, Block 8</div>
+                        <div class="portfolio-metrics">
+                            <div class="metric"><div class="val">18</div><div class="lbl">Units</div></div>
+                            <div class="metric"><div class="val">94%</div><div class="lbl">Occupied</div></div>
+                            <div class="metric"><div class="val">6.9%</div><div class="lbl">Yield</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing-section" id="pricing">
+        <div class="section-inner">
+            <div class="pricing-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>Pricing</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">Transparent Pricing, <em>Exceptional</em> Value</h2>
+                <p class="section-desc">Choose the plan that fits your portfolio. No hidden fees, no surprises — just results.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card animate-on-scroll">
+                    <h3>Essential</h3>
+                    <p class="subtitle">For single property owners</p>
+                    <div class="price-display">8<span>%</span></div>
+                    <p class="price-note">of monthly rental income</p>
+                    <ul class="price-features">
+                        <li>Tenant screening & placement</li>
+                        <li>Rent collection & disbursement</li>
+                        <li>Basic maintenance coordination</li>
+                        <li>Monthly financial reporting</li>
+                        <li>Lease agreement management</li>
+                    </ul>
+                    <a href="#cta" class="price-btn">Get Started</a>
+                </div>
+                <div class="price-card featured animate-on-scroll">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <p class="subtitle">For growing portfolios</p>
+                    <div class="price-display">10<span>%</span></div>
+                    <p class="price-note">of monthly rental income</p>
+                    <ul class="price-features">
+                        <li>Everything in Essential, plus:</li>
+                        <li>Priority maintenance response</li>
+                        <li>Professional property photography</li>
+                        <li>Quarterly property inspections</li>
+                        <li>24/7 tenant support hotline</li>
+                        <li>Legal dispute assistance</li>
+                    </ul>
+                    <a href="#cta" class="price-btn">Get Started</a>
+                </div>
+                <div class="price-card animate-on-scroll">
+                    <h3>Enterprise</h3>
+                    <p class="subtitle">For large-scale investors</p>
+                    <div class="price-display">Custom</div>
+                    <p class="price-note">tailored to your portfolio</p>
+                    <ul class="price-features">
+                        <li>Everything in Professional, plus:</li>
+                        <li>Dedicated account manager</li>
+                        <li>Portfolio optimization consulting</li>
+                        <li>Custom reporting dashboards</li>
+                        <li>Bulk maintenance contracts</li>
+                        <li>Strategic market advisory</li>
+                    </ul>
+                    <a href="#cta" class="price-btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-inner">
+            <div class="testimonials-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>Testimonials</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">What Our <em>Clients</em> Say</h2>
+                <p class="section-desc">Real stories from property owners who've transformed their portfolios with Synchro.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-quote">Synchro turned my headache property into a hands-off income stream. Their tenant vetting alone saved me from two potential disasters.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TM</div>
+                        <div class="author-info">
+                            <h4>Thabo Molefe</h4>
+                            <p>Property Investor, Gaborone</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-quote">The response time is unreal. A tenant reported a leak at 9 PM, and by morning it was fixed. That's the kind of service that keeps occupancy at 100%.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LK</div>
+                        <div class="author-info">
+                            <h4>Lesego Kgosi</h4>
+                            <p>Portfolio Owner, 8 Properties</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="quote-mark">"</div>
+                    <p class="testimonial-quote">Their market insights helped me identify an undervalued area in Phakalane. I purchased and they managed it — best investment decision I've made.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">OR</div>
+                        <div class="author-info">
+                            <h4>Onneile Ramotlwa</h4>
+                            <p>Commercial Investor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="section-inner">
+            <div class="faq-header">
+                <div class="section-eyebrow">
+                    <div class="line"></div>
+                    <span>FAQ</span>
+                    <div class="line"></div>
+                </div>
+                <h2 class="section-title">Questions? <em>Answered.</em></h2>
+                <p class="section-desc">Everything you need to know before partnering with Synchro.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How quickly can you find a tenant for my property?
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Our average time-to-lease is 14 days from listing. For well-maintained properties in prime locations like Phakalane or the CBD, we've placed tenants in under a week. Our marketing reach and tenant database give us a significant edge.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What happens if a tenant stops paying rent?
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        We have a structured process: immediate contact on day 1, formal notice on day 3, and legal proceedings if unresolved by day 7. Our rigorous screening minimizes this risk, but when it happens, we act fast to protect your income.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you handle maintenance and repairs?
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. We coordinate everything from routine maintenance to emergency repairs through our vetted contractor network across Gaborone. You'll receive photo documentation and cost approval requests for anything above your pre-set threshold.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I track my property's performance?
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        Every owner receives a secure online dashboard showing real-time occupancy, rental income, expenses, and maintenance history. Professional and Enterprise plans include detailed quarterly performance reports with market benchmarking.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there a contract lock-in period?
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        We offer flexible terms starting at 6 months, with 12-month agreements receiving discounted management fees. We believe in earning your business every month — if you're not satisfied, you can exit with 30 days' notice.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta">
+        <div class="cta-inner">
+            <div class="section-eyebrow">
+                <div class="line"></div>
+                <span>Get Started</span>
+                <div class="line"></div>
+            </div>
+            <h2>Ready to Transform Your <em>Property Portfolio</em>?</h2>
+            <p>Join over 200 property owners across Botswana who've discovered the freedom of professional, technology-driven property management. Your first consultation is complimentary.</p>
+            
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form" style="max-width: 520px; margin: 40px auto 0;">
+                <input type="hidden" name="_subject" value="New Synchro Consultation Request">
+                <input type="hidden" name="_gotcha" style="display:none">
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                    <input type="text" name="name" placeholder="Your Name" required 
+                        style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95em; outline: none; transition: all 0.3s;">
+                    <input type="email" name="email" placeholder="Email Address" required 
+                        style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95em; outline: none; transition: all 0.3s;">
+                </div>
+                
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                    <input type="tel" name="phone" placeholder="Phone Number" 
+                        style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95em; outline: none; transition: all 0.3s;">
+                    <select name="portfolio_size" 
+                        style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); font-family: 'Inter', sans-serif; font-size: 0.95em; outline: none; transition: all 0.3s; cursor: pointer;">
+                        <option value="" disabled selected>Portfolio Size</option>
+                        <option value="1">1 Property</option>
+                        <option value="2-5">2–5 Properties</option>
+                        <option value="6-15">6–15 Properties</option>
+                        <option value="16+">16+ Properties</option>
+                    </select>
+                </div>
+                
+                <textarea name="message" placeholder="Tell us about your properties and goals..." rows="4" 
+                    style="width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95em; outline: none; transition: all 0.3s; resize: vertical; margin-bottom: 14px;"></textarea>
